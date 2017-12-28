@@ -33,6 +33,7 @@ export default class PlayComponent extends Component {
 
     _stop(audio) {
         audio.pause();
+        /* 兼容css3动画暂停代码 */
         const circle = this.refs.circle;
         const anim = this.refs.anim;
         let iTransform = getComputedStyle(anim).transform;
