@@ -16,16 +16,16 @@ http://www.i728.top/pages/11/#/
 
 ### 手机扫码访问
 
-![Markdown](http://www.i728.top/dist/images/vue_db_market_ewm.png)
+![Markdown](http://www.i728.top/dist/images/ewm_react_163_music.png)
 
 ### 部分截图
 
-![Markdown](http://www.i728.top/dist/images/preview.png)
+![Markdown](http://www.i728.top/dist/images/music_163_preview.png)
 
 ### 项目地址：（`git clone`）
 
 ```shell
-git clone https://github.com/Awheat/vue2-douban-market.git
+git clone https://github.com/Awheat/react-163-music.git
 ```
 
 ### 安装
@@ -39,7 +39,7 @@ npm install
 ```
 npm run dev
 ```
-浏览器输入:(http://localhost:8080)即可看到效果
+浏览器输入:(http://localhost:3000)即可看到效果
 
 ### 发布
 
