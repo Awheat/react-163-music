@@ -1,5 +1,5 @@
 /**
- * Created by Administrator on 2017/11/14.
+ * api by wuwc on 2017-12-25.
  */
 import 'whatwg-fetch';
 import Promise from 'promise-polyfill';
@@ -7,7 +7,6 @@ import Promise from 'promise-polyfill';
 export default class Api {
 
     /* 环境以及api前缀 */
-    isDev = true;
     apiPrefix = "";
 
     /* headers */
@@ -26,9 +25,13 @@ export default class Api {
 
     constructor() {
         //设置base地址
-        this.isDev ? this.apiPrefix = '/api' : this.apiPrefix = 'http://www.baidu.com/api';
+        this.apiPrefix = process.env.NODE_ENV !== 'production' ? '/api' : 'http://www.i728.top/pages/11/api';
+
         //拼接url
-        for (let key in this.urls) this.urls[key] = this.apiPrefix + this.urls[key];
+        for (let key in this.urls) {
+            this.urls[key] = process.env.NODE_ENV !== 'production' ? this.apiPrefix + this.urls[key] : this.apiPrefix + this.urls[key] + '.json';
+        }
+
     }
 
     /* 参数合并 */

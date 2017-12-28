@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {Link} from 'react-router-dom';
 import SongItem from '../common/SongItem';
 
 /* 歌单Item */
@@ -6,13 +7,15 @@ class SongSheetItem extends Component {
     render() {
         const item = this.props.item || {};
         return (
-            <div className="song_sheet_item">
-                <div className="rmd_sht_img">
-                    <i className="earp">{item.count}</i>
-                    <img src={item.img} alt=""/>
+            <Link to={"/playList/" + item.id}>
+                <div className="song_sheet_item">
+                    <div className="rmd_sht_img">
+                        <i className="earp">{item.count}</i>
+                        <img src={item.img} alt=""/>
+                    </div>
+                    <div className="rmd_sht_text">{item.desc}</div>
                 </div>
-                <div className="rmd_sht_text">{item.desc}</div>
-            </div>
+            </Link>
         )
     }
 }
@@ -89,8 +92,6 @@ class Footer extends Component {
 /* Tab-Main: 推荐音乐 */
 class RecommendComponent extends Component {
     render() {
-        console.log(this.props.songSheets);
-
         return (
             <div className="cmp_recommend">
                 <div className="rmd_title">推荐歌单</div>

@@ -1,10 +1,13 @@
+/*
+*
+* reducers by wuwc on 2017-12-21
+*
+* */
 import * as actionTypes from './actionTypes';
 
 const initialState = {
     isShowCoverPage: false,
     isShowMenu: false,
-    isLogin: false,
-    indexList: [],
     isPlay: true
 };
 

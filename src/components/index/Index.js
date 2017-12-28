@@ -20,12 +20,12 @@ export default class IndexComponent extends Component {
     }
 
     componentWillMount() {
-
         console.log(this.props);
-
-
+        /*
+        * 获取歌单数据
+        *
+        * */
         this.api.getSongSheets().then((res) => {
-            console.log(res);
             if (res.state === "200") {
                 this.setState({
                     songSheets: res.data
@@ -33,6 +33,10 @@ export default class IndexComponent extends Component {
             }
         });
 
+        /*
+        * 获取歌曲数据
+        *
+        * */
         this.api.getSongs().then((res) => {
             if (res.state === "200") {
                 this.setState({
@@ -45,7 +49,6 @@ export default class IndexComponent extends Component {
 
     /* tab选项卡切换函数 */
     onSwitchNavActiveHandler(i) {
-        console.log(i);
         this.setState({
             activeId: i
         })

@@ -1,3 +1,8 @@
+/*
+*
+* actions by wuwc on 2017-12-21
+*
+* */
 import * as actionTypes from './actionTypes';
 
 export const isShowCoverPage = (isShowCoverPage) => {
@@ -6,19 +11,6 @@ export const isShowCoverPage = (isShowCoverPage) => {
 
 export const isShowMenu = (isShowMenu) => {
     return {type: actionTypes.IS_SHOW_MENU, isShowMenu}
-};
-
-export const isLogin = (isLogin) => {
-    return {type: actionTypes.IS_LOGIN, isLogin}
-};
-
-
-export const incrementAction = (num) => {
-    return {type: actionTypes.INCREMENT, value: num}
-};
-
-export const decrementAction = (num) => {
-    return {type: actionTypes.DECREMENT, value: num}
 };
 
 export const isPlay = (isPlay) => {

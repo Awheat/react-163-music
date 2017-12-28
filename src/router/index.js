@@ -1,13 +1,13 @@
+/*
+*
+* router by wuwc 2017-12-20
+*
+* */
 import React from 'react';
-import {
-    BrowserRouter as Router,
-    Route,
-    Switch,
-    Redirect
-} from 'react-router-dom';
+import {BrowserRouter, HashRouter, Switch, Route, Redirect} from 'react-router-dom';
 
-import {asyncComponent} from '../utils/asyncComponent';
 import Index from '../containers/Index';
+import {asyncComponent} from '../utils/asyncComponent';
 
 const routes = [
     {
@@ -21,11 +21,14 @@ const routes = [
         component: asyncComponent(() => import('../containers/Play'))
     },
     {
-        path: '/playList',
+        path: '/playList/:songSheetId',
         exact: false,
         component: asyncComponent(() => import('../containers/PlayList'))
     }
 ];
+
+/* 本地环境使用BrowserRouter, 线上环境使用HashRouter */
+let Router = process.env.NODE_ENV !== 'production' ? BrowserRouter : HashRouter;
 
 const RouterConfig = (
     <Router>

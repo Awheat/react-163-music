@@ -17,22 +17,30 @@ export default class PlayComponent extends Component {
             bg: "",
             picture: "",
             lyric: [],
-            source: ""
-        }
+            source: "",
+            circleClassName: "brand spin"
+        };
     }
 
     /*
-    *
-    * 播放函数
+    * 自动播放
     * */
-    _play() {
-        const audio = this.refs.music;
-        if (this.props.isPlay) {
-            audio.play();
-            this._lyric(audio);
-        } else {
-            audio.pause();
-        }
+    _play(audio) {
+        audio.play();
+        this._lyric(audio);
+        this.setState({circleClassName: "brand spin"});
+    }
+
+    _stop(audio) {
+        audio.pause();
+        const circle = this.refs.circle;
+        const anim = this.refs.anim;
+        let iTransform = getComputedStyle(anim).transform;
+        let cTransform = getComputedStyle(circle).transform;
+        circle.style.transform = cTransform === 'none'
+            ? iTransform
+            : iTransform.concat(' ', cTransform);
+        this.setState({circleClassName: "brand"});
     }
 
     /*
@@ -41,10 +49,14 @@ export default class PlayComponent extends Component {
     *
     * */
     _control() {
-        this.props.onChangPlayStatus(!this.props.isPlay);
-        setTimeout(() => {
-            this._play();
-        }, 0);
+        const audio = this.refs.music;
+        if (this.props.isPlay) {
+            this.props.onChangPlayStatus(false);
+            this._stop(audio);
+        } else {
+            this.props.onChangPlayStatus(true);
+            this._play(audio);
+        }
     }
 
     /*
@@ -82,7 +94,6 @@ export default class PlayComponent extends Component {
                 if (index > 2) {
                     lyric.style.WebkitTransform = "translate3d(0," + (-(index - 1) * 30) + "px,0)";
                 }
-
             }, 500);
         } else {
             audio.pause();
@@ -132,6 +143,7 @@ export default class PlayComponent extends Component {
         return minutes + ":" + seconds;
     }
 
+
     /*
     *
     * 生命周期一
@@ -144,8 +156,6 @@ export default class PlayComponent extends Component {
         this.api.getPlayInfo(songId).then((res) => {
             const data = res.data;
             const lyric = this._formatLyric(data[ind].info.lyric);
-            console.log(data[ind].info.lyric);
-            console.log(lyric);
             this.setState({
                 title: data[ind].info.title,
                 bg: data[ind].bg,
@@ -164,8 +174,23 @@ export default class PlayComponent extends Component {
     componentDidMount() {
         const audio = this.refs.music;
         audio.addEventListener("loadeddata", () => {
-            this._play();
+            if (this.props.isPlay) this._play(audio);
         }, false);
+
+        setTimeout(() => {
+            /* 兼容ios无法自动播放代码 */
+            window.wx.config({
+                debug: false,
+                appId: '',
+                timestamp: 1,
+                nonceStr: '',
+                signature: '',
+                jsApiList: []
+            });
+            window.wx.ready(() => {
+                if (this.props.isPlay) this._play(audio);
+            });
+        }, 0);
     }
 
     /*
@@ -186,12 +211,14 @@ export default class PlayComponent extends Component {
                     <div className="logo"></div>
                     <div className="control">
                         <div className={this.props.isPlay ? 'handler play' : 'handler'}></div>
-                        <div className="disc" onClick={this._control.bind(this)}>
-                            <div className="btn_play" style={{display: this.props.isPlay ? 'block' : 'none'}}>
+                        <div className="disc" ref="control" onClick={this._control.bind(this)}>
+                            <div className={this.props.isPlay ? 'btn_stop' : 'btn_play'}>
                                 <audio src={this.state.source} ref="music"></audio>
                             </div>
-                            <div className={this.props.isPlay ? 'photo spin' : 'photo spin stop'} ref="anim">
-                                <img src={this.state.picture} alt=""/>
+                            <div className="circle" ref="circle">
+                                <div className={this.state.circleClassName} ref="anim">
+                                    <img src={this.state.picture} alt=""/>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -212,5 +239,9 @@ export default class PlayComponent extends Component {
                 </div>
             </div>
         )
+    }
+
+    componentWillUnmount() {
+        this.props.onChangPlayStatus(false);
     }
 }

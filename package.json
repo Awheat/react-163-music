@@ -14,6 +14,7 @@
     "redux-thunk": "^2.2.0",
     "whatwg-fetch": "^2.0.3"
   },
+  "homepage": "http://www.i728.top/pages/11",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
