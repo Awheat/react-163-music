@@ -1,4 +1,4 @@
-### react-163-music (基于react+react-router-dom+redux技术, 构建的一个简单的web端网易云音乐入门实例！)
+### 此实例基于react+react-router-dom+redux技术, 构建的web端网易云音乐入门实例！
 
 
 此时在写这个react的入门实例已经是在2017年的尾巴上了, 还有不到几天的时间就来到了2018年, 不得不感慨时间过的是真快！
