@@ -58,3 +58,17 @@ npm run build
 * webpack2
 * es6
 * fetch
+
+### 总结与收获
+
+1.关于redux状态管理,个人理解一个reducer就是一个状态并且管理一个状态, 其实在此实例中完全可以不使用redux技术,但是为了学习所以加了一点点
+2.执行dispatch改变状态好像有点不及时,所以我用了一个延时setTimeout调用好像就可以达到效果了
+3.打包发布时需要配置homepage地址, 不然包扔到线上各种路径错误
+4.关于路由本地环境可以用BrowserRouter,如果线上环境没有配置(比如Nginx重定向的话), 需要使用HashRouter来进行路由访问
+5.css3 animation-play-state 暂停动画在ios上存在兼容问题, 已通过其他方法解决
+6.html5的audio元素在ios中无法自动播放,必须手动交互才可以播放，已通过其他方式解决
+
+### 感谢
+
+感谢您的来访 ，如果对于您有帮助 ，麻烦您使劲的给个Star吧 ！ ^_^ 
+
