@@ -38,14 +38,14 @@ npm install
 ### 运行
 
 ```
-npm run dev
+yarn start Or npm run start
 ```
 浏览器输入:(http://localhost:3000)即可看到效果
 
 ### 发布
 
 ```
-npm run build
+yarn build Or npm run build
 ```
 
 ### 技术栈
