@@ -38,7 +38,15 @@ npm install
 ### 运行
 
 ```
+
+一.进入server目录,启动node服务(本地模拟数据接口):
+
+node app.js
+
+二.项目根目录启动项目:
+
 yarn start Or npm run start
+
 ```
 浏览器输入:(http://localhost:3000)即可看到效果
 
