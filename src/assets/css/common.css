@@ -26,6 +26,7 @@ i {
 }
 
 a {
+    display: block;
     color: #333;
     text-decoration: none;
 }

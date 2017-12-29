@@ -133,7 +133,7 @@ export default class IndexComponent extends Component {
                             nav.map((item, i) => {
                                 return (
                                     <li key={i} className={i === this.state.activeId ? 'active' : ''}
-                                        onClick={() => this.onSwitchNavActiveHandler(i)}>{item}</li>
+                                        onClick={() => this.onSwitchNavActiveHandler(i)} style={{cursor:'pointer'}}>{item}</li>
                                 )
                             })
                         }

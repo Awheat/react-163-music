@@ -75,7 +75,9 @@ yarn build Or npm run build
 * 关于路由本地环境可以用BrowserRouter,如果线上环境没有配置(比如Nginx重定向的话), 需要使用HashRouter来进行路由访问
 * css3 animation-play-state 暂停动画在ios上存在兼容问题, 已通过其他方法解决
 * html5的audio元素在ios中无法自动播放,必须手动交互才可以播放，已通过其他方式解决
+  (备注：这个问题又回滚回去了,因为使用了wxjssdk的解决方法带来了新的严重的坑, 所以目前在ios上默认是不自动播放的)
 * 接口请求的封装,以及回调的统一处理
+
 
 ### 感谢
 

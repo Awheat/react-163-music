@@ -18,7 +18,8 @@ export default class PlayComponent extends Component {
             picture: "",
             lyric: [],
             source: "",
-            circleClassName: "brand spin"
+            isRun: true,
+            circleClassName: "brand"
         };
     }
 
@@ -50,6 +51,7 @@ export default class PlayComponent extends Component {
     *
     * */
     _control() {
+        this.props.onChangPlayStatus(!this.props.isPlay);
         const audio = this.refs.music;
         if (this.props.isPlay) {
             this.props.onChangPlayStatus(false);
@@ -144,13 +146,7 @@ export default class PlayComponent extends Component {
         return minutes + ":" + seconds;
     }
 
-
-    /*
-    *
-    * 生命周期一
-    *
-    * */
-    componentWillMount() {
+    _loadData() {
         /* 根据Id请求数据 */
         const songId = this.props.match.params.songId;
         const ind = songId % 2 === 0 ? 0 : songId % 3 === 0 ? 1 : 2;
@@ -167,6 +163,38 @@ export default class PlayComponent extends Component {
         });
     }
 
+
+    /*
+    *
+    * 生命周期一
+    *
+    * */
+    componentWillMount() {
+        /*
+        *
+        * 如果是ios设备默认第一次不是播放状态，android没事
+        *
+        * */
+        this.isIos() ? this.props.onChangPlayStatus(false) : this.props.onChangPlayStatus(true);
+
+        /*
+        *
+        *  请求数据
+        *
+        *
+        * */
+        this._loadData();
+    }
+
+    /*
+    *
+    * 设备识别: ios上音频或视频默认是不让自动播放的,wxjssdk解决是可以解决但是有坑
+    *
+    * */
+    isIos() {
+        return !!navigator.userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
+    }
+
     /*
     *
     * 生命周期二
@@ -177,21 +205,6 @@ export default class PlayComponent extends Component {
         audio.addEventListener("loadeddata", () => {
             if (this.props.isPlay) this._play(audio);
         }, false);
-
-        setTimeout(() => {
-            /* 兼容ios无法自动播放代码 */
-            window.wx.config({
-                debug: false,
-                appId: '',
-                timestamp: 1,
-                nonceStr: '',
-                signature: '',
-                jsApiList: []
-            });
-            window.wx.ready(() => {
-                if (this.props.isPlay) this._play(audio);
-            });
-        }, 0);
     }
 
     /*
@@ -212,9 +225,10 @@ export default class PlayComponent extends Component {
                     <div className="logo"></div>
                     <div className="control">
                         <div className={this.props.isPlay ? 'handler play' : 'handler'}></div>
-                        <div className="disc" ref="control" onClick={this._control.bind(this)}>
+                        <div className="disc" ref="control" style={{cursor: 'pointer'}}
+                             onClick={this._control.bind(this)}>
                             <div className={this.props.isPlay ? 'btn_stop' : 'btn_play'}>
-                                <audio src={this.state.source} ref="music"></audio>
+                                <audio src={this.state.source} ref="music" autoPlay="autoplay"></audio>
                             </div>
                             <div className="circle" ref="circle">
                                 <div className={this.state.circleClassName} ref="anim">
@@ -230,7 +244,7 @@ export default class PlayComponent extends Component {
                             <div className="lyric_cont" id="lyricCont" ref="lyricCont">
                                 {
                                     this.state.lyric.map((item, i) => {
-                                        return <p data-time={item.time} key={i}
+                                        return <p key={i}
                                                   className={i === this.state.flag ? 'active' : ''}>{item.text}</p>;
                                     })
                                 }
@@ -243,6 +257,6 @@ export default class PlayComponent extends Component {
     }
 
     componentWillUnmount() {
-        this.props.onChangPlayStatus(false);
+
     }
 }
