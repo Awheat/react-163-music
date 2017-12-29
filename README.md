@@ -50,7 +50,7 @@ npm run build
 
 ### 技术栈
 
-在此DEMO中使用了一下技术
+在此DEMO中使用了一下知识点
 * react
 * react-router-dom
 * redux
