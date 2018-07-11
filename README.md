@@ -13,15 +13,16 @@ vue的小入门实例, 下半年不知不觉的随着新的工作环境技术栈
 
 #线上访问地址
 
-http://www.i728.top/pages/11/#/
+http://wuwc.i728.top/examples/11/#/
+
 
 ### 手机扫码访问
 
-![Markdown](http://www.i728.top/dist/images/ewm_react_163_music.png)
+![Markdown](http://wuwc.i728.top/static/images/ewm_react.png)
 
 ### 部分截图
 
-![Markdown](http://www.i728.top/dist/images/music_163_preview.png)
+![Markdown](http://wuwc.i728.top/static/images/music_163_preview.png)
 
 ### 项目地址：（`git clone`）
 
